@@ -69,7 +69,21 @@ public class NotesDAO {
 
         try {
             String[] args = {Integer.toString(note.getId())};
-
+            write.update(DBHelper.TABLE_NAME, content, "id=?",args);
+        } catch (Exception e) {
+            return false;
         }
+        return true;
     }
+
+    public boolean delete(Note note) {
+        try {
+            String[] args = {Integer.toString(note.getId())};
+            write.delete(DBHelper.TABLE_NAME, "id=?", args);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
 }
