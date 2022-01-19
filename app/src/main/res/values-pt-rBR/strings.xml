@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Minhas Anotações</string>
+    <string name="button_add_note_description">Botão para adicionar uma nova nota</string>
+</resources>
