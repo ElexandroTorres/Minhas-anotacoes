@@ -1,46 +1,52 @@
 package com.elexandro.minhasanotacoes.model;
 
+import java.util.Calendar;
+
 public class Note {
-    private String _id;
-    private String _title;
-    private String _description;
-    private String _date;
+    private int id;
+    private String title;
+    private String description;
+    private String date;
 
-    public String get_id() {
-        return _id;
+    public int getId() {
+        return id;
     }
 
-    public String get_title() {
-        return _title;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void set_title(String _title) {
-        this._title = _title;
+    public String getTitle() {
+        return title;
     }
 
-    public String get_description() {
-        return _description;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void set_description(String _description) {
-        this._description = _description;
+    public String getDescription() {
+        return description;
     }
 
-    public String get_date() {
-        return _date;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void set_date(String _date) {
-        this._date = _date;
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return "Note{" +
-                "_id='" + _id + '\'' +
-                ", _title='" + _title + '\'' +
-                ", _description='" + _description + '\'' +
-                ", _date='" + _date + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", date='" + date + '\'' +
                 '}';
     }
 }
