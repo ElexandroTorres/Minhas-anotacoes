@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My Notes</string>
     <string name="button_add_note_description">Button to add a new note</string>
+    <string name="note_hint_text">Digite as suas anotações</string>
 </resources>

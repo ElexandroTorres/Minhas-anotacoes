@@ -1,10 +1,16 @@
 package com.elexandro.minhasanotacoes.ui;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,6 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +35,22 @@ public class MainActivity extends AppCompatActivity {
     private NotesDAO notesDAO;
     private RecyclerView rvNotesList;
     private FloatingActionButton fabAddNote;
+    private List<Note> notes = new ArrayList<>();
+
+    ActivityResultLauncher<Intent> noteResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if(result != null && result.getResultCode() == RESULT_OK) {
+                if(result.getData() != null && result.getData().getExtras().getParcelable("novaNota") != null) {
+                    Note newNote = result.getData().getExtras().getParcelable("novaNota");
+                    notes.add(newNote);
+                    int index = notes.size() - 1;
+                    adapter.notifyItemInserted(index);
+                    notesDAO.save(newNote);
+                }
+            }
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,31 +60,20 @@ public class MainActivity extends AppCompatActivity {
         findIds();
         setListeners();
 
-
-        Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        String strDate = dateFormat.format(date);
-
-        /*
-        Toast.makeText(getApplicationContext(), strDate
-                , Toast.LENGTH_LONG).show();
-        */
-
         notesDAO = new NotesDAO(getApplicationContext());
-        List<Note> notes =  notesDAO.listNotes();
+        notes =  notesDAO.listNotes();
         adapter = new NotesAdapter(notes);
 
-        //Toast.makeText(getApplicationContext(), notesDAO.listNotes().size(), Toast.LENGTH_SHORT).show();
+        for(int i = 0; i < notes.size(); i++) {
+            Log.d("lista", notes.get(i).toString());
+        }
 
+        //notesDAO.delete(notes.get(0));
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         rvNotesList.setLayoutManager(layoutManager);
         rvNotesList.setHasFixedSize(true);
         rvNotesList.setAdapter(adapter);
-
-
-
-
 
     }
 
@@ -69,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
         fabAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+                noteResult.launch(intent);
             }
         });
     }
