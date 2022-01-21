@@ -30,8 +30,6 @@ public class NoteActivity extends AppCompatActivity {
 
         findIds();
         setListeners();
-
-
     }
 
     private void findIds() {
@@ -73,7 +71,7 @@ public class NoteActivity extends AppCompatActivity {
                     newNote.setDate(strDate);
 
                     Intent intent = new Intent();
-                    intent.putExtra("novaNota", newNote);
+                    intent.putExtra("newNote", newNote);
                     setResult(RESULT_OK, intent);
                     finish();
                 }

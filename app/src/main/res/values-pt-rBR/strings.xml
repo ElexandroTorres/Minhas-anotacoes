@@ -3,4 +3,13 @@
     <string name="app_name">Minhas Anotações</string>
     <string name="button_add_note_description">Botão para adicionar uma nova nota</string>
     <string name="note_hint_text">Digite as suas anotações</string>
+    <string name="clear_notes">Apagar todas as notas</string>
+    <string name="delete_all_notes_alert_tittle">Apagar todas as notas?</string>
+    <string name="delete_all_notes_alert_message">Tem Certeza que deseja apagar todas as suas notas?</string>
+    <string name="delete_all_notes_done">Todas as notas apagadas!!!</string>
+    <string name="delete_all_notes_error">Não foi possivel apagar todas as notas!</string>
+    <string name="delete_all_notes_confirm">SIM</string>
+    <string name="delete_all_notes_negative">Não</string>
+    <string name="note_tittle">Digite o titulo</string>
+    <string name="fab_write_note_description">Gravar nota</string>
 </resources>

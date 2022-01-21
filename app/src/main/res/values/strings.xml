@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">My Notes</string>
     <string name="button_add_note_description">Button to add a new note</string>
-    <string name="note_hint_text">Digite as suas anotações</string>
+    <string name="note_hint_text">Write your notes</string>
+    <string name="clear_notes">Delete all notes</string>
+    <string name="delete_all_notes_alert_tittle">Delete all notes?</string>
+    <string name="delete_all_notes_alert_message">Tem Certeza que deseja apagar todas as suas notas?</string>
+    <string name="delete_all_notes_done">All notes deleted!!!</string>
+    <string name="delete_all_notes_error">Não foi possivel apagar todas as notas!</string>
+    <string name="delete_all_notes_confirm">YES</string>
+    <string name="delete_all_notes_negative">NO</string>
+    <string name="note_tittle">Digite o titulo</string>
+    <string name="fab_write_note_description">Gravar nota</string>
 </resources>

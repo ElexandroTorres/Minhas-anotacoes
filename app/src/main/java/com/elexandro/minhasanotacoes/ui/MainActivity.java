@@ -4,13 +4,18 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -36,13 +41,14 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rvNotesList;
     private FloatingActionButton fabAddNote;
     private List<Note> notes = new ArrayList<>();
+    AlertDialog deleteAllDialog;
 
     ActivityResultLauncher<Intent> noteResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
             if(result != null && result.getResultCode() == RESULT_OK) {
-                if(result.getData() != null && result.getData().getExtras().getParcelable("novaNota") != null) {
-                    Note newNote = result.getData().getExtras().getParcelable("novaNota");
+                if(result.getData() != null && result.getData().getExtras().getParcelable("newNote") != null) {
+                    Note newNote = result.getData().getExtras().getParcelable("newNote");
                     notes.add(newNote);
                     int index = notes.size() - 1;
                     adapter.notifyItemInserted(index);
@@ -77,6 +83,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_delete_all) {
+            createDialogs();
+            deleteAllDialog.show();
+        }
+        return true;
+    }
+
     private void setListeners() {
         fabAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,5 +111,30 @@ public class MainActivity extends AppCompatActivity {
     private void findIds() {
         rvNotesList = findViewById(R.id.rv_notes_list);
         fabAddNote = findViewById(R.id.fab_add_note);
+    }
+
+    private void createDialogs() {
+        deleteAllDialog = new AlertDialog.Builder(MainActivity.this).setTitle(R.string.delete_all_notes_alert_tittle)
+                .setMessage(R.string.delete_all_notes_alert_message)
+                .setPositiveButton(R.string.delete_all_notes_confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(notesDAO.deleteAll()) {
+                            adapter.notifyDataSetChanged();
+                            Toast.makeText(MainActivity.this, R.string.delete_all_notes_done, Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this, R.string.delete_all_notes_error, Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton(R.string.delete_all_notes_negative, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
     }
 }

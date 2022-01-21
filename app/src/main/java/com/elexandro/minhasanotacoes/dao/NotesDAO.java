@@ -37,7 +37,7 @@ public class NotesDAO {
 
     public List<Note> listNotes() {
         List<Note> notes = new ArrayList<>();
-        String sql = "SELECT * FROM " + DBHelper.TABLE_NAME + ";";
+        String sql = "SELECT * FROM " + DBHelper.TABLE_NAME + " ORDER BY " + DBHelper.ID + " DESC;";
 
         Cursor cursor = read.rawQuery(sql, null);
 
@@ -83,6 +83,21 @@ public class NotesDAO {
         } catch (Exception e) {
             return false;
         }
+        return true;
+    }
+
+    public boolean deleteAll() {
+        String sqlDelete = "DELETE FROM " + DBHelper.TABLE_NAME + ";";
+        String sqlResetIncrement = "UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME=" + DBHelper.TABLE_NAME;
+
+        try {
+            write.execSQL(sqlDelete);
+            write.execSQL(sqlResetIncrement);
+            write.execSQL("VACUUM");
+        } catch (Exception e) {
+            return false;
+        }
+
         return true;
     }
 
