@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.util.Calendar;
 
-public class Note implements Parcelable {
+public class Note implements Parcelable, Comparable<Note>{
     private int id;
     private String title;
     private String description;
@@ -31,6 +31,8 @@ public class Note implements Parcelable {
             return new Note[size];
         }
     };
+
+
 
     public int getId() {
         return id;
@@ -85,5 +87,12 @@ public class Note implements Parcelable {
         dest.writeString(title);
         dest.writeString(description);
         dest.writeString(date);
+    }
+
+    @Override
+    public int compareTo(Note o) {
+        Integer id = new Integer(this.id);
+
+        return id.compareTo(o.getId());
     }
 }

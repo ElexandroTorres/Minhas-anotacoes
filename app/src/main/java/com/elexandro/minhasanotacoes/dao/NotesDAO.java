@@ -4,11 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.elexandro.minhasanotacoes.helpers.DBHelper;
 import com.elexandro.minhasanotacoes.model.Note;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NotesDAO {
@@ -37,12 +39,12 @@ public class NotesDAO {
 
     public List<Note> listNotes() {
         List<Note> notes = new ArrayList<>();
-        String sql = "SELECT * FROM " + DBHelper.TABLE_NAME + " ORDER BY " + DBHelper.ID + " DESC;";
-
+        String sql = "SELECT * FROM " + DBHelper.TABLE_NAME + ";";
         Cursor cursor = read.rawQuery(sql, null);
 
         cursor.moveToFirst();
         while(cursor.moveToNext()) {
+            Log.d("banco", "entrou no while");
             Note note = new Note();
             int id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.ID));
             String title = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.TITLE));
@@ -57,7 +59,7 @@ public class NotesDAO {
             notes.add(note);
         }
         cursor.close();
-
+        Collections.sort(notes, Collections.reverseOrder());
         return notes;
     }
 
@@ -88,11 +90,9 @@ public class NotesDAO {
 
     public boolean deleteAll() {
         String sqlDelete = "DELETE FROM " + DBHelper.TABLE_NAME + ";";
-        String sqlResetIncrement = "UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME=" + DBHelper.TABLE_NAME;
 
         try {
             write.execSQL(sqlDelete);
-            write.execSQL(sqlResetIncrement);
             write.execSQL("VACUUM");
         } catch (Exception e) {
             return false;

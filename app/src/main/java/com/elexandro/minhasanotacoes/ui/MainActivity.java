@@ -49,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
             if(result != null && result.getResultCode() == RESULT_OK) {
                 if(result.getData() != null && result.getData().getExtras().getParcelable("newNote") != null) {
                     Note newNote = result.getData().getExtras().getParcelable("newNote");
-                    notes.add(newNote);
-                    int index = notes.size() - 1;
-                    adapter.notifyItemInserted(index);
+                    int index = notes.size();
                     notesDAO.save(newNote);
+                    notes.add(0, newNote);
+                    adapter.notifyItemInserted(0);
                 }
             }
         }
@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(notesDAO.deleteAll()) {
+                            notes.clear();
                             adapter.notifyDataSetChanged();
                             Toast.makeText(MainActivity.this, R.string.delete_all_notes_done, Toast.LENGTH_SHORT).show();
                         }
