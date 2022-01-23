@@ -1,9 +1,12 @@
 package com.elexandro.minhasanotacoes.ui;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,6 +25,7 @@ public class NoteActivity extends AppCompatActivity {
     FloatingActionButton fabSaveNote;
     EditText etTitle;
     EditText etNote;
+    AlertDialog backDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,5 +81,30 @@ public class NoteActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        createDialogs();
+        backDialog.show();
+    }
+
+    private void createDialogs() {
+        backDialog = new AlertDialog.Builder(NoteActivity.this).setTitle("Descartar alterações?")
+                .setMessage("Foram feitas alterações nessa nota, deseja descartar elas?")
+                .setPositiveButton("Descartar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                      backDialog.dismiss();
+                      finish();
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
     }
 }

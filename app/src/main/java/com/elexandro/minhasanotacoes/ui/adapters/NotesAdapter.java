@@ -16,16 +16,19 @@ import java.util.List;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
     private final List<Note> notes;
+    private ItemNoteListener itemListener;
 
-    public NotesAdapter(List<Note> notes) {
+    public NotesAdapter(List<Note> notes, ItemNoteListener itemListener) {
         this.notes = notes;
+        this.itemListener = itemListener;
     }
+
 
     @NonNull
     @Override
     public NotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View noteItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item, parent, false);
-        return new NotesViewHolder(noteItem);
+        return new NotesViewHolder(noteItem, itemListener);
     }
 
     @Override
@@ -40,15 +43,36 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
         return notes.size();
     }
 
-    public class NotesViewHolder extends RecyclerView.ViewHolder {
+    public class NotesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         TextView tvNoteTitle;
         TextView tvNoteDate;
+        ItemNoteListener itemNListener;
 
-        public NotesViewHolder(@NonNull View itemView) {
+        public NotesViewHolder(@NonNull View itemView, ItemNoteListener itemListener) {
             super(itemView);
             tvNoteTitle = itemView.findViewById(R.id.tv_note_title);
             tvNoteDate = itemView.findViewById(R.id.tv_note_date);
+            this.itemNListener = itemListener;
+
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
 
         }
+
+        @Override
+        public void onClick(View v) {
+            itemNListener.onItemClickListener(getAdapterPosition());
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            itemNListener.onItemLongClickListener(getAdapterPosition());
+            return true;
+        }
+    }
+
+    public interface ItemNoteListener {
+        void onItemClickListener(int position);
+        void onItemLongClickListener(int posiiton);
     }
 }

@@ -4,8 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="24sp"
+        android:hint="@string/note_tittle"/>
 
 
 
@@ -13,7 +17,7 @@
         layout="@layout/content_note"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="50dp"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

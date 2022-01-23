@@ -34,7 +34,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NotesAdapter.ItemNoteListener{
 
     private NotesAdapter adapter;
     private NotesDAO notesDAO;
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     adapter.notifyItemInserted(0);
                 }
             }
+            //
         }
     });
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         notesDAO = new NotesDAO(getApplicationContext());
         notes =  notesDAO.listNotes();
-        adapter = new NotesAdapter(notes);
+        adapter = new NotesAdapter(notes, this);
 
         for(int i = 0; i < notes.size(); i++) {
             Log.d("lista", notes.get(i).toString());
@@ -137,5 +138,22 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .create();
+    }
+
+    @Override
+    public void onItemClickListener(int position) {
+        Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+        intent.putExtra("noteToUpdate", notes.get(position));
+        noteResult.launch(intent);
+    }
+
+    @Override
+    public void onItemLongClickListener(int position) {
+        int index = position;
+        if(notesDAO.delete(notes.get(position))) {
+            notes.remove(position);
+            adapter.notifyItemRemoved(position);
+        }
+        //não foi possivel remover.
     }
 }
