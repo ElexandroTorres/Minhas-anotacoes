@@ -22,10 +22,11 @@ import java.util.Date;
 
 public class NoteActivity extends AppCompatActivity {
 
-    FloatingActionButton fabSaveNote;
-    EditText etTitle;
-    EditText etNote;
-    AlertDialog backDialog;
+    private FloatingActionButton fabSaveNote;
+    private EditText etTitle;
+    private EditText etNote;
+    private AlertDialog backDialog;
+    private Note noteToUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class NoteActivity extends AppCompatActivity {
 
         findIds();
         setListeners();
+
+        noteToUpdate = getIntent().getParcelableExtra("noteToUpdate");
     }
 
     private void findIds() {
@@ -85,11 +88,30 @@ public class NoteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        createDialogs();
-        backDialog.show();
+        String currentNoteTitle = etTitle.getText().toString();
+        String currentNoteContent = etNote.getText().toString();
+        if(!currentNoteTitle.isEmpty() || !currentNoteContent.isEmpty()) {
+            if(noteToUpdate != null) {
+                if(!currentNoteTitle.equals(noteToUpdate.getTitle())
+                || !currentNoteContent.equals(noteToUpdate.getDescription())) {
+                    backDialog();
+                    backDialog.show();
+                }
+                else {
+                    finish();
+                }
+            }
+            else {
+                backDialog();
+                backDialog.show();
+            }
+        }
+        else {
+            finish();
+        }
     }
 
-    private void createDialogs() {
+    private void backDialog() {
         backDialog = new AlertDialog.Builder(NoteActivity.this).setTitle("Descartar alterações?")
                 .setMessage("Foram feitas alterações nessa nota, deseja descartar elas?")
                 .setPositiveButton("Descartar", new DialogInterface.OnClickListener() {

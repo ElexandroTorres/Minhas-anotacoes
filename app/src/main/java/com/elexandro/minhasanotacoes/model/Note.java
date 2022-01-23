@@ -32,8 +32,6 @@ public class Note implements Parcelable, Comparable<Note>{
         }
     };
 
-
-
     public int getId() {
         return id;
     }

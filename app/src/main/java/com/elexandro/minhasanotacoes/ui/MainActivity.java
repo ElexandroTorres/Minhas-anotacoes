@@ -36,12 +36,14 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NotesAdapter.ItemNoteListener{
 
-    private NotesAdapter adapter;
-    private NotesDAO notesDAO;
     private RecyclerView rvNotesList;
     private FloatingActionButton fabAddNote;
+
+    private NotesAdapter adapter;
+    private NotesDAO notesDAO;
     private List<Note> notes = new ArrayList<>();
-    AlertDialog deleteAllDialog;
+    private AlertDialog deleteAllDialog;
+    private AlertDialog deleteNoteDialog;
 
     ActivityResultLauncher<Intent> noteResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
@@ -55,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.Item
                     adapter.notifyItemInserted(0);
                 }
             }
-            //
         }
     });
 
@@ -70,12 +71,6 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.Item
         notesDAO = new NotesDAO(getApplicationContext());
         notes =  notesDAO.listNotes();
         adapter = new NotesAdapter(notes, this);
-
-        for(int i = 0; i < notes.size(); i++) {
-            Log.d("lista", notes.get(i).toString());
-        }
-
-        //notesDAO.delete(notes.get(0));
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         rvNotesList.setLayoutManager(layoutManager);
@@ -93,10 +88,15 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.Item
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menu_delete_all) {
-            createDialogs();
+            createDeleteAllNotesDialog();
             deleteAllDialog.show();
         }
         return true;
+    }
+
+    private void findIds() {
+        rvNotesList = findViewById(R.id.rv_notes_list);
+        fabAddNote = findViewById(R.id.fab_add_note);
     }
 
     private void setListeners() {
@@ -109,12 +109,7 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.Item
         });
     }
 
-    private void findIds() {
-        rvNotesList = findViewById(R.id.rv_notes_list);
-        fabAddNote = findViewById(R.id.fab_add_note);
-    }
-
-    private void createDialogs() {
+    private void createDeleteAllNotesDialog() {
         deleteAllDialog = new AlertDialog.Builder(MainActivity.this).setTitle(R.string.delete_all_notes_alert_tittle)
                 .setMessage(R.string.delete_all_notes_alert_message)
                 .setPositiveButton(R.string.delete_all_notes_confirm, new DialogInterface.OnClickListener() {
@@ -140,6 +135,32 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.Item
                 .create();
     }
 
+    private void createDeleteNoteDialog(int position) {
+        deleteNoteDialog = new AlertDialog.Builder(MainActivity.this).setTitle("Deletar nota?")
+                .setMessage("Tem certeza que deseja deletar esta nota?")
+                .setPositiveButton(R.string.delete_all_notes_confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(notesDAO.delete(notes.get(position))) {
+                            notes.remove(position);
+                            adapter.notifyItemRemoved(position);
+                            Toast.makeText(MainActivity.this, "Nota deletada", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this, "Não foi possivel deletar a nota", Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton(R.string.delete_all_notes_negative, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+    }
+
     @Override
     public void onItemClickListener(int position) {
         Intent intent = new Intent(MainActivity.this, NoteActivity.class);
@@ -149,11 +170,7 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.Item
 
     @Override
     public void onItemLongClickListener(int position) {
-        int index = position;
-        if(notesDAO.delete(notes.get(position))) {
-            notes.remove(position);
-            adapter.notifyItemRemoved(position);
-        }
-        //não foi possivel remover.
+        createDeleteNoteDialog(position);
+        deleteNoteDialog.show();
     }
 }
