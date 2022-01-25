@@ -1,40 +1,40 @@
-<h1  align="center">Minhas anotações</h1>
+<h1  align="center">Minhas anotaÃ§Ãµes</h1>
 
 <p  align="center">
 
-Aplicativo para escrever e guardar anotações.
+Aplicativo para escrever e guardar anotaÃ§Ãµes.
 
 </p>
-Utilizando da tecnologia SQLite para armazenamento interno no dispositivo, o aplicativo permite as operações cruciais de um banco de dados. É possivel Criar, Ler, Atualizar e Deletar as notas disponiveis.
+Utilizando da tecnologia SQLite para armazenamento interno no dispositivo, o aplicativo permite as operaÃ§Ãµes cruciais de um banco de dados. Ã‰ possivel Criar, Ler, Atualizar e Deletar as notas disponiveis.
 
 <b> * Topicos estudados *
 
 <p>
  - Uso do SQLite, permitindo a persistencia de dados <br>
- - Internacionalisação, fazendo com que o APP tenha duas linguas disponiveis (Inglês e Português) <br>
- - Operações no banco de dados e na UI para mostrar alterçaões feitas para o usuario. <br>
+ - InternacionalisaÃ§Ã£o, fazendo com que o APP tenha duas linguas disponiveis (InglÃªs e PortuguÃªs) <br>
+ - OperaÃ§Ãµes no banco de dados e na UI para mostrar alterÃ§aÃµes feitas para o usuario. <br>
 </p>
 
 <b> * Alguns funcionalidades que o aplicativo possui *
 
 <p>
- - Quando se está criando ou editando uma nova nota, caso o botão de voltar seja apertado e alguma alteração tenha sido feita na nota, um alerta é exibido perguntando se é desejado descartar as alterações feitas ou cancelar <br>
- - Um botão na tela inicial permitindo que todas as notas sejam apagadas. Um alerta também é exibido para que o usuario confirme a ação <br>
- - É possivel apagar uma note especifica pressionando e segurando sobre ela por um tempo, um alerta também será mostrado para que o usuario confirme que deseja apagar a nota <br>
+ - Quando se estÃ¡ criando ou editando uma nova nota, caso o botÃ£o de voltar seja apertado e alguma alteraÃ§Ã£o tenha sido feita na nota, um alerta Ã© exibido perguntando se Ã© desejado descartar as alteraÃ§Ãµes feitas ou cancelar <br>
+ - Um botÃ£o na tela inicial permitindo que todas as notas sejam apagadas. Um alerta tambÃ©m Ã© exibido para que o usuario confirme a aÃ§Ã£o <br>
+ - Ã‰ possivel apagar uma note especifica pressionando e segurando sobre ela por um tempo, um alerta tambÃ©m serÃ¡ mostrado para que o usuario confirme que deseja apagar a nota <br>
 </p>
 
 <h3> Telas do aplicativo em um celular Multilaser MS50L</h3>
 
 <p float="left">
-<img  alt="Imagem mostrando a tela inicial do aplicativo sem nenhuma nota na lista"  title="Demonstração aplicativo, tela inicial"  src="./screenchots/telaPrincipal.jpg" width="300"> 
+<img  alt="Imagem mostrando a tela inicial do aplicativo sem nenhuma nota na lista"  title="DemonstraÃ§Ã£o aplicativo, tela inicial"  src="./screenshots/telaPrincipal.jpg" width="300"> 
 
-<img  alt="Imagem mostrando a tela inicial do aplicativo com uma lista de notas"  title="Demonstração aplicativo, tela inicial com lista de notas"  src="./screenchots/telaListaNotas.jpg" width="300"> 
+<img  alt="Imagem mostrando a tela inicial do aplicativo com uma lista de notas"  title="DemonstraÃ§Ã£o aplicativo, tela inicial com lista de notas"  src="./screenshots/telaListaNotas.jpg" width="300"> 
 
-<img  alt="Imagem mostrando a tela de anotação vazia"  title="Demonstração aplicativo, tela de anotação vazia"  src="./screenchots/telaAnotacao.jpg" width="300"> 
+<img  alt="Imagem mostrando a tela de anotaÃ§Ã£o vazia"  title="DemonstraÃ§Ã£o aplicativo, tela de anotaÃ§Ã£o vazia"  src="./screenshots/telaAnotacao.jpg" width="300"> 
 
-<img  alt="Imagem mostrando a tela de anotação preenchida"  title="Demonstração aplicativo, tela de anotação preenchida"  src="./screenchots/telaAnotacaoEscrita.jpg" width="300"> 
+<img  alt="Imagem mostrando a tela de anotaÃ§Ã£o preenchida"  title="DemonstraÃ§Ã£o aplicativo, tela de anotaÃ§Ã£o preenchida"  src="./screenshots/telaAnotacaoEscrita.jpg" width="300"> 
 
-<img  alt="Imagem mostrando o alerta de deletar nota"  title="Demonstração aplicativo, deletar nota"  src="./screenchots/telaDeletarNota.jpg" width="300"> 
+<img  alt="Imagem mostrando o alerta de deletar nota"  title="DemonstraÃ§Ã£o aplicativo, deletar nota"  src="./screenshots/telaDeletarNota.jpg" width="300"> 
 
 
 
