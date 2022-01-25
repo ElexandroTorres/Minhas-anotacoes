@@ -1,4 +1,4 @@
-<h1  align="center">Minhas anotações</h1>
+# Minhas anotações
 
 <p  align="center">
 
@@ -7,7 +7,7 @@ Aplicativo para escrever e guardar anotações.
 </p>
 Utilizando da tecnologia SQLite para armazenamento interno no dispositivo, o aplicativo permite as operações cruciais de um banco de dados. É possivel Criar, Ler, Atualizar e Deletar as notas disponiveis.
 
-<b> * Topicos estudados *
+### * Topicos estudados *
 
 <p>
  - Uso do SQLite, permitindo a persistencia de dados <br>
@@ -15,7 +15,7 @@ Utilizando da tecnologia SQLite para armazenamento interno no dispositivo, o apl
  - Operações no banco de dados e na UI para mostrar alterçaões feitas para o usuario. <br>
 </p>
 
-<b> * Alguns funcionalidades que o aplicativo possui *
+### * Alguns funcionalidades que o aplicativo possui *
 
 <p>
  - Quando se está criando ou editando uma nova nota, caso o botão de voltar seja apertado e alguma alteração tenha sido feita na nota, um alerta é exibido perguntando se é desejado descartar as alterações feitas ou cancelar <br>
