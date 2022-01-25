@@ -1,47 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="8dp"
-
-    >
+    android:elevation="4dp"
+    app:rippleColor="@color/primaryVariantColor"
+    app:strokeColor="@color/primaryOnColor"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        >
+        android:layout_margin="8dp">
 
         <TextView
             android:id="@+id/tv_note_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            tools:text="Titulo da nota"
-            android:textSize="16sp"
-            />
+            tools:text="Titulo da nota" />
 
         <TextView
             android:id="@+id/tv_note_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_note_title"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="19/01/2022"
-            android:textSize="14sp"
-            />
-
-
+            app:layout_constraintTop_toBottomOf="@id/tv_note_title"
+            tools:text="19/01/2022" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

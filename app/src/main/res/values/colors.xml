@@ -8,5 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="noteColor">#FF001211</color>
+    <color name="noteColor">#C09655</color>
+    <color name="primaryColor">#8a695e</color>
+    <color name="primaryVariantColor">#5c3e34</color>
+    <color name="primaryOnColor">#8a695e</color>
+    <color name="secondaryColor">#8a695e</color>
+    <color name="secondaryVariantColor">#8a695e</color>
+    <color name="secondaryOnColor">#cbc995</color>
 </resources>

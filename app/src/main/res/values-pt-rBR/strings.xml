@@ -11,5 +11,15 @@
     <string name="delete_all_notes_confirm">SIM</string>
     <string name="delete_all_notes_negative">Não</string>
     <string name="note_tittle">Digite o titulo</string>
-    <string name="fab_write_note_description">Gravar nota</string>
+    <string name="fab_write_note_description">Salvar nota</string>
+    <string name="delete_note_alert_title">Deletar nota?</string>
+    <string name="delete_note_alert_message">Tem certeza que deseja deletar esta nota?</string>
+    <string name="delete_note_done">Nota deletada</string>
+    <string name="delete_note_error">Não foi possivel deletar a nota</string>
+    <string name="empty_note_toast">Insira algo na nota</string>
+    <string name="back_alert_title">Descartar alterações?</string>
+    <string name="back_alert_message">Foram feitas alterações nessa nota, deseja descartar elas?</string>
+    <string name="back_alert_positive">Descartar</string>
+    <string name="back_alert_negative">Cancelar</string>
+    <string name="note_logo_title">Minhas \nAnotações</string>
 </resources>

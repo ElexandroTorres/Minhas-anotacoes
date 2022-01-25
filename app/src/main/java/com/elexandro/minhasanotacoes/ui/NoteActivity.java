@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class NoteActivity extends AppCompatActivity {
     private EditText etNote;
     private AlertDialog backDialog;
     private Note noteToUpdate;
+    private boolean isToUpdate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,11 @@ public class NoteActivity extends AppCompatActivity {
         setListeners();
 
         noteToUpdate = getIntent().getParcelableExtra("noteToUpdate");
+        if(noteToUpdate != null) {
+            isToUpdate = true;
+            etTitle.setText(noteToUpdate.getTitle());
+            etNote.setText(noteToUpdate.getDescription());
+        }
     }
 
     private void findIds() {
@@ -53,10 +60,17 @@ public class NoteActivity extends AppCompatActivity {
                 String noteTitle = etTitle.getText().toString();
 
                 if(noteDescription.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Insira algo na nota", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.empty_note_toast, Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Note newNote = new Note();
+                    Note newNote;
+
+                    if(isToUpdate) {
+                        newNote = noteToUpdate;
+                    }
+                    else {
+                        newNote = new Note();
+                    }
                     newNote.setDescription(noteDescription);
 
                     if(noteTitle.equals("")) {
@@ -71,14 +85,21 @@ public class NoteActivity extends AppCompatActivity {
                         newNote.setTitle(noteTitle);
                     }
 
-                    Date date = Calendar.getInstance().getTime();
-                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                    String strDate = dateFormat.format(date);
+                    if(!isToUpdate) {
+                        Date date = Calendar.getInstance().getTime();
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        String strDate = dateFormat.format(date);
 
-                    newNote.setDate(strDate);
+                        newNote.setDate(strDate);
+                    }
 
                     Intent intent = new Intent();
-                    intent.putExtra("newNote", newNote);
+                    if(isToUpdate) {
+                        intent.putExtra("updatedNote", newNote);
+                    }
+                    else {
+                        intent.putExtra("newNote", newNote);
+                    }
                     setResult(RESULT_OK, intent);
                     finish();
                 }
@@ -112,16 +133,16 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void backDialog() {
-        backDialog = new AlertDialog.Builder(NoteActivity.this).setTitle("Descartar alterações?")
-                .setMessage("Foram feitas alterações nessa nota, deseja descartar elas?")
-                .setPositiveButton("Descartar", new DialogInterface.OnClickListener() {
+        backDialog = new AlertDialog.Builder(NoteActivity.this).setTitle(R.string.back_alert_title)
+                .setMessage(R.string.back_alert_message)
+                .setPositiveButton(R.string.back_alert_positive, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                       backDialog.dismiss();
                       finish();
                     }
                 })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.back_alert_negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

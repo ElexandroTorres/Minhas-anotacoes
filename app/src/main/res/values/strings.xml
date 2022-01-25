@@ -4,11 +4,21 @@
     <string name="note_hint_text">Write your notes</string>
     <string name="clear_notes">Delete all notes</string>
     <string name="delete_all_notes_alert_tittle">Delete all notes?</string>
-    <string name="delete_all_notes_alert_message">Tem Certeza que deseja apagar todas as suas notas?</string>
+    <string name="delete_all_notes_alert_message">Are you sure you want to delete all your notes?</string>
     <string name="delete_all_notes_done">All notes deleted!!!</string>
-    <string name="delete_all_notes_error">Não foi possivel apagar todas as notas!</string>
+    <string name="delete_all_notes_error">Could not delete all notes!</string>
     <string name="delete_all_notes_confirm">YES</string>
     <string name="delete_all_notes_negative">NO</string>
-    <string name="note_tittle">Digite o titulo</string>
-    <string name="fab_write_note_description">Gravar nota</string>
+    <string name="note_tittle">Write the title</string>
+    <string name="fab_write_note_description">Save note</string>
+    <string name="delete_note_alert_title">Deletar nota?</string>
+    <string name="delete_note_alert_message">Are you suro you wanto to delete this note?</string>
+    <string name="delete_note_done">Note deleted</string>
+    <string name="delete_note_error">Could not delete this note!</string>
+    <string name="empty_note_toast">Write something in the note</string>
+    <string name="back_alert_title">Discard changes?</string>
+    <string name="back_alert_message">Changes have been made in this not, want to discard them??</string>
+    <string name="back_alert_positive">Discard</string>
+    <string name="back_alert_negative">Cancel</string>
+    <string name="note_logo_title">My \nNotes</string>
 </resources>

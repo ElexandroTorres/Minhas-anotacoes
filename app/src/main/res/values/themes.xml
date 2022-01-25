@@ -2,25 +2,25 @@
     <!-- Base application theme. -->
     <style name="Theme.MyNotes" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#8a695e</item>
-        <item name="colorPrimaryVariant">#5c3e34</item>
-        <item name="colorOnPrimary">#8a695e</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryVariantColor</item>
+        <item name="colorOnPrimary">@color/primaryOnColor</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#8a695e</item>
-        <item name="colorSecondaryVariant">#8a695e</item>
-        <item name="colorOnSecondary">#cbc995</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryVariantColor</item>
+        <item name="colorOnSecondary">@color/secondaryOnColor</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
 
-    <style name="Theme.MyNotes.NoBar" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="colorPrimary">#8a695e</item>
-        <item name="colorPrimaryVariant">#5c3e34</item>
-        <item name="colorOnPrimary">#8a695e</item>
+    <style name="Theme.MyNotes.NoBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryVariantColor</item>
+        <item name="colorOnPrimary">@color/primaryOnColor</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#8a695e</item>
-        <item name="colorSecondaryVariant">#8a695e</item>
-        <item name="colorOnSecondary">#cbc995</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryVariantColor</item>
+        <item name="colorOnSecondary">@color/secondaryOnColor</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>

@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.Item
     private AlertDialog deleteAllDialog;
     private AlertDialog deleteNoteDialog;
 
+    private int indexToUpdate = -1;
+
     ActivityResultLauncher<Intent> noteResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
@@ -55,6 +57,13 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.Item
                     notesDAO.save(newNote);
                     notes.add(0, newNote);
                     adapter.notifyItemInserted(0);
+                }
+                else if(result.getData() != null && result.getData().getExtras().getParcelable("updatedNote") != null) {
+                    Note updatedNote = result.getData().getExtras().getParcelable("updatedNote");
+                    notesDAO.update(updatedNote);
+                    notes.set(indexToUpdate, updatedNote);
+                    adapter.notifyItemChanged(indexToUpdate);
+                    indexToUpdate = -1;
                 }
             }
         }
@@ -76,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.Item
         rvNotesList.setLayoutManager(layoutManager);
         rvNotesList.setHasFixedSize(true);
         rvNotesList.setAdapter(adapter);
-
     }
 
     @Override
@@ -136,18 +144,18 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.Item
     }
 
     private void createDeleteNoteDialog(int position) {
-        deleteNoteDialog = new AlertDialog.Builder(MainActivity.this).setTitle("Deletar nota?")
-                .setMessage("Tem certeza que deseja deletar esta nota?")
+        deleteNoteDialog = new AlertDialog.Builder(MainActivity.this).setTitle(R.string.delete_note_alert_title)
+                .setMessage(R.string.delete_note_alert_message)
                 .setPositiveButton(R.string.delete_all_notes_confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(notesDAO.delete(notes.get(position))) {
                             notes.remove(position);
                             adapter.notifyItemRemoved(position);
-                            Toast.makeText(MainActivity.this, "Nota deletada", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, R.string.delete_note_done, Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            Toast.makeText(MainActivity.this, "Não foi possivel deletar a nota", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, R.string.delete_note_error, Toast.LENGTH_SHORT).show();
                         }
                         dialog.dismiss();
                     }
@@ -165,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements NotesAdapter.Item
     public void onItemClickListener(int position) {
         Intent intent = new Intent(MainActivity.this, NoteActivity.class);
         intent.putExtra("noteToUpdate", notes.get(position));
+        indexToUpdate = position;
         noteResult.launch(intent);
     }
 
