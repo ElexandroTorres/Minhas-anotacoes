@@ -11,7 +11,7 @@ Utilizando da tecnologia SQLite para armazenamento interno no dispositivo, o apl
 
 <p>
  - Uso do SQLite, permitindo a persistencia de dados <br>
- - Internacionalisação, fazendo com que o APP tenha duas linguas disponiveis (Inglês e Português) <br>
+ - Internacionalização, fazendo com que o APP tenha duas linguas disponiveis (Inglês e Português) <br>
  - Operações no banco de dados e na UI para mostrar alterçaões feitas para o usuario. <br>
 </p>
 
